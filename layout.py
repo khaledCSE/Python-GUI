@@ -1,6 +1,7 @@
 # import tkinter as tk
 # from tkinter import ttk
 from textwrap import fill
+from turtle import title
 import customtkinter as ctk
 
 class App(ctk.CTk):
@@ -118,12 +119,54 @@ class App(ctk.CTk):
 
       detection_result_frame = ctk.CTkFrame(right)
 
+      # * Detection GRID
+      detect_frame_left = ctk.CTkFrame(detection_result_frame, fg_color='transparent')
+      detect_frame_right = ctk.CTkFrame(detection_result_frame, fg_color='transparent')
+
+      detect_frame_left.pack(side='left')
+      detect_frame_right.pack(side='right')
+
+      for i in range(0, 14):
+         if i % 2 == 0:
+            ctk.CTkLabel(detect_frame_left, text=f'{i + 1}: tibia [0, 74]', padx=10).pack(side=ctk.TOP)
+         else:
+            ctk.CTkLabel(detect_frame_right, text=f'{i + 1}: tibia [0, 74]', padx=10).pack(side=ctk.TOP)
+      # * ******* Detection GRID end ***********
+
       display_info_prompt = ctk.CTkLabel(right, text='Select a Part to Display', font=('Roboto', 14), padx = 10, pady = 10)
       component_selector_combo = ctk.CTkComboBox(right, values=['Component 1', 'Component 2', 'Component 3'])
       component_empty_label = ctk.CTkLabel(right, text='')
       component_show_button = ctk.CTkButton(right, text='Show Component')
 
       selected_result_frame = ctk.CTkFrame(right)
+
+      selected_result_output = [
+         'Lh Standard Footrest SW 38Cm/40,5Cm - Short',
+         'Lower Tube, Part number: 1530620',
+         'included parts',
+         'Fixed Footplate Ng Left 174mm (Sw38-40.5)',
+         'Part number: 1529643',
+         'Footrest Tube, Short',
+         'Part number: 1434561-0010',
+         'Screw Kit, Footrest Fixed',
+         'Part number: 1430433',
+         'Plug Ikpt 2017S',
+         'Part number: 1424576',
+         'Lh Standard Footrest SW 38Cm/40,5Cm - Short',
+         'Lower Tube, Part number: 1530620',
+         'included parts',
+         'Fixed Footplate Ng Left 174mm (Sw38-40.5)',
+         'Part number: 1529643',
+         'Footrest Tube, Short',
+         'Part number: 1434561-0010',
+         'Screw Kit, Footrest Fixed',
+         'Part number: 1430433',
+         'Plug Ikpt 2017S',
+         'Part number: 1424576'
+      ]
+
+      for i, string in enumerate(selected_result_output):
+         ctk.CTkLabel(selected_result_frame, text=string, justify=ctk.LEFT).pack(side=ctk.TOP, anchor='w')
 
       # * Packing
       right_header.pack()
@@ -132,7 +175,7 @@ class App(ctk.CTk):
       component_selector_combo.pack()
       component_empty_label.pack()
       component_show_button.pack()
-      selected_result_frame.pack(expand=True, fill='x')
+      selected_result_frame.pack(expand=True, fill='x', side='left')
 
 class SizeNotifier:
   def __init__(self, window, size_dict):
