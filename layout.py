@@ -5,15 +5,15 @@ from PIL import ImageTk, Image
 class App(ctk.CTk):
   def __init__(self, start_size):
     super().__init__()
-    self.title('Responsive Layout')
+    self.title('YOLO Tuned')
     self.geometry(f'{start_size[0]}x{start_size[1]}')
 
     self.frame = ctk.CTkFrame(self)
     self.frame.pack(expand = True, fill = 'both')
 
     size_notifier = SizeNotifier(self, { 
-      300: self.create_small_layout, 
-      600: self.create_medium_layout,
+      # 300: self.create_small_layout, 
+      # 600: self.create_medium_layout,
       1200: self.create_large_layout,
       })
     self.mainloop()
