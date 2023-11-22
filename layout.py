@@ -1,8 +1,6 @@
-# import tkinter as tk
-# from tkinter import ttk
-from textwrap import fill
-from turtle import title
+from tkinter import Label
 import customtkinter as ctk
+from PIL import ImageTk, Image
 
 class App(ctk.CTk):
   def __init__(self, start_size):
@@ -109,7 +107,24 @@ class App(ctk.CTk):
       # ************* Left end ******************
 
       # * Image
-      ctk.CTkLabel(self.frame, text = 'Label 2', fg_color =  'green').grid(column = 1, row = 0, columnspan = 2, sticky = 'nsew', padx = 10, pady = 10)
+      center = ctk.CTkFrame(self.frame)
+      center.grid(column = 1, row = 0, columnspan = 2, sticky = 'nsew', padx = 10, pady = 10)
+
+      center_header = ctk.CTkLabel(center, text='Processed Image', font=('Roboto', 24), padx=10, pady=10)
+      image_frame = ctk.CTkFrame(center)
+
+      image_frame.columnconfigure(0, weight=1)
+      image_frame.rowconfigure(0, weight=1)
+
+      processed_image = ImageTk.PhotoImage(Image.open('foot-image.png'))
+      image_label = Label(image_frame, image=processed_image, anchor='nw')
+
+      image_label.image = processed_image # type: ignore
+      image_label.grid(column=0, row=0)
+
+      # * Packing
+      center_header.pack()
+      image_frame.pack(expand=True, fill='both')
 
       # * Info
       right = ctk.CTkFrame(self.frame)
